@@ -1,4 +1,4 @@
-import {Model} from 'mongoose';
+import {Model, Types} from 'mongoose';
 
 export interface UserFields {
     username: string;
@@ -11,4 +11,12 @@ export interface UserMethods {
     generateToken(): void;
 }
 
-export type UserModel = Model<UserFields, {}, UserMethods>
+export type UserModel = Model<UserFields, {}, UserMethods>;
+
+export interface IPost {
+    user: Types.ObjectId;
+    title: string;
+    description: string;
+    image: string;
+    datetime: Date;
+}
