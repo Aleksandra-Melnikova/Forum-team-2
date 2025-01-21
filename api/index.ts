@@ -4,8 +4,7 @@ import config from "./config";
 import * as mongoose from "mongoose";
 import userRouter from "./routers/users";
 import mongoDb from "./mongoDb";
-
-
+import postsRouter from './routers/posts';
 
 const app = express();
 const port = 8000;
@@ -15,7 +14,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/users', userRouter);
-
+app.use('/posts', postsRouter);
 
 const run = async () => {
     await mongoose.connect(config.db);
