@@ -32,77 +32,73 @@ const run = async () => {
 
     const [post1, post2, post3, post4] = await Post.create(
         {
-            date: new Date(),
-            author: jane._id,
-            title: "Кто на меня подписан, тот знает: я не такой",
+            datetime: new Date(),
+            user: jane._id,
+            description: "Кто на меня подписан, тот знает: я не такой",
+            title: 'hello word',
             image: "fixtures/post1.jpg",
         },
         {
-            date: new Date(),
-            author: jane._id,
-            title: "Кто в аскфм?",
+            datetime: new Date(),
+            user: jane._id,
+            description: "Кто в аскфм?",
+            title: 'hello word',
             image: "fixtures/post2.jpg",
         },
         {
-            date: new Date(),
-            author: john._id,
-            title: "POV: Ты случайно зашёл в мой профиль",
+            datetime: new Date(),
+            user: john._id,
+            description: "POV: Ты случайно зашёл в мой профиль",
+            title: 'hello word',
             image: "fixtures/post3.jpg",
         },
         {
-            date: new Date(),
-            author: john._id,
-            title: "Это не я, это фильтр так решил",
+            datetime: new Date(),
+            user: john._id,
+            description: "Это не я, это фильтр так решил",
+            title: 'hello word',
             image: "fixtures/post4.jpg",
         }
     );
 
     await Comment.create(
         {
-            _id: randomUUID(),
-            author: jane._id,
+            user: jane._id,
             post: post3._id,
             text: "Это ты сделал? Или интернет уже не тот? ",
         },
         {
-            _id: randomUUID(),
-            author: jane._id,
+            user: jane._id,
             post: post4._id,
             text: "Эта фотка прям 4K, а я на ней как в 144p, спасибо",
         },
         {
-            _id: randomUUID(),
-            author: john._id,
+            user: john._id,
             post: post1._id,
             text: "А ты куда такой красивый, в магазин за хлебом?",
         },
         {
-            _id: randomUUID(),
-            author: john._id,
+            user: john._id,
             post: post2._id,
             text: "Дай угадаю, фильтр называется 'Я только что проснулся'?",
         },
         {
-            _id: randomUUID(),
-            author: jane._id,
+            user: jane._id,
             post: post4._id,
             text: "Это лицо перед контрольной по математике?",
         },
         {
-            _id: randomUUID(),
-            author: john._id,
+            user: john._id,
             post: post2._id,
             text: "Ты гений или просто в TikTok насмотрелся?",
         },
         {
-            _id: randomUUID(),
-            author: jane._id,
+            user: jane._id,
             post: post3._id,
             text: "Похоже, ты взял уроки фотошопа у своей бабушки ",
         },
         {
-            _id: randomUUID(),
-            author: john._id,
+            user: john._id,
             post: post1._id,
             text: "Красивая фотка! Жду, когда ты подаришь мне пиццу!",
         }
