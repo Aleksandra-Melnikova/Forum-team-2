@@ -34,3 +34,20 @@ export interface ValidationError {
 export interface GlobalError {
   error: string;
 }
+
+export interface IPost {
+  _id: string;
+  user: {
+    username: string;
+  };
+  title: string;
+  description: string;
+  image: File | null;
+  datetime: Date;
+}
+
+export interface IPostMutation {
+  title: string;
+  description: string;
+  image: File | null;
+}

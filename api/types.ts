@@ -10,6 +10,6 @@ export interface IPost {
     user: Types.ObjectId;
     title: string;
     description: string;
-    image: string;
+    image: string | null;
     datetime: Date;
 }
