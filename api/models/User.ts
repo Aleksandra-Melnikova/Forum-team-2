@@ -48,6 +48,7 @@ UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
 
     const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+    console.log(salt);
     const hash = await bcrypt.hash(this.password, salt);
 
     this.password = hash;
@@ -63,14 +64,12 @@ UserSchema.methods.generateToken = function () {
 }
 
 UserSchema.set('toJSON', {
-    transform: (doc, ret, options) => {
+    transform: (_doc, ret) => {
         delete ret.password;
         return ret;
-    }
+    },
 });
 
-
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model<UserFields, UserModel>('User', UserSchema);
 
 export default User;
-

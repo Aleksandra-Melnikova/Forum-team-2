@@ -63,42 +63,50 @@ const run = async () => {
 
     await Comment.create(
         {
-            user: jane._id,
+            _id: randomUUID(),
+            author: jane._id,
             post: post3._id,
             text: "Это ты сделал? Или интернет уже не тот? ",
         },
         {
-            user: jane._id,
+            _id: randomUUID(),
+            author: jane._id,
             post: post4._id,
             text: "Эта фотка прям 4K, а я на ней как в 144p, спасибо",
         },
         {
-            user: john._id,
+            _id: randomUUID(),
+            author: john._id,
             post: post1._id,
             text: "А ты куда такой красивый, в магазин за хлебом?",
         },
         {
-            user: john._id,
+            _id: randomUUID(),
+            author: john._id,
             post: post2._id,
             text: "Дай угадаю, фильтр называется 'Я только что проснулся'?",
         },
         {
-            user: jane._id,
+            _id: randomUUID(),
+            author: jane._id,
             post: post4._id,
             text: "Это лицо перед контрольной по математике?",
         },
         {
-            user: john._id,
+            _id: randomUUID(),
+            author: john._id,
             post: post2._id,
             text: "Ты гений или просто в TikTok насмотрелся?",
         },
         {
-            user: jane._id,
+            _id: randomUUID(),
+            author: jane._id,
             post: post3._id,
             text: "Похоже, ты взял уроки фотошопа у своей бабушки ",
         },
         {
-            user: john._id,
+            _id: randomUUID(),
+            author: john._id,
             post: post1._id,
             text: "Красивая фотка! Жду, когда ты подаришь мне пиццу!",
         }
