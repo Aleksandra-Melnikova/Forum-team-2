@@ -31,7 +31,7 @@ const UserSchema = new Schema<
                 const user: UserFields | null = await User.findOne({username: value});
                 return !user;
             },
-            message: "This username is already taken",
+            message: "Данное имя уже существует",
         }
     },
     password: {
@@ -64,12 +64,13 @@ UserSchema.methods.generateToken = function () {
 }
 
 UserSchema.set('toJSON', {
-    transform: (_doc, ret) => {
+    transform: (doc, ret, options) => {
         delete ret.password;
         return ret;
-    },
+    }
 });
 
-const User = mongoose.model<UserFields, UserModel>('User', UserSchema);
+
+const User = mongoose.model('User', UserSchema);
 
 export default User;

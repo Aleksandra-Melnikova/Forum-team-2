@@ -5,16 +5,16 @@ const CommentSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: [true, 'User id is required'],
+        required: [true, 'Требуется идентификатор пользователя.'],
     },
     post:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
-        required: [true, 'Post id is required'],
+        required: [true, 'Требуется идентификатор поста.'],
     },
     text: {
         type: String,
-        required: [true, 'Text text is required.'],
+        required: [true, 'Требуется идентификатор текста.'],
     },
 });
 

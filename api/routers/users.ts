@@ -17,7 +17,7 @@ userRouter.post('/register', async (req, res, next) => {
         user.generateToken();
 
         await user.save();
-        res.send({user, message: "Register success"});
+        res.send({user, message: "Регистрация прошла успешно!"});
     } catch (error) {
         if (error instanceof Error.ValidationError) {
             res.status(400).send(error);
@@ -33,21 +33,21 @@ userRouter.post('/sessions', async (req, res, next) => {
         const user = await User.findOne({username: req.body.username});
 
         if (!user) {
-            res.status(400).send({error: 'Username not found'});
+            res.status(400).send({error: 'Не найден пользователь с таким именем'});
             return;
         }
 
         const isMatch = await user.checkPassword(req.body.password);
 
         if (!isMatch) {
-            res.status(400).send({error: 'Password is wrong!'});
+            res.status(400).send({error: 'Неверный пароль!'});
             return;
         }
 
         user.generateToken();
         await user.save();
 
-        res.send({message: 'Username and password is correct', user});
+        res.send({message: 'Имя и пароль введены верно!', user});
 
     } catch (error) {
         if (error instanceof Error.ValidationError) {
@@ -67,7 +67,7 @@ userRouter.delete('/sessions', auth, async (req, res, next) => {
         if (user) {
             user.generateToken();
             await user.save();
-            res.send({message: 'Success logOut', user: user});
+            res.send({message: 'Успешный вход в систему!', user: user});
         }
     } catch (e) {
         next(e)
@@ -79,7 +79,7 @@ userRouter.delete('/sessions', auth, async (req, res, next) => {
 userRouter.post('/secret', auth, async (req, res, next) => {
     let expressReq = req as RequestWithUser;
     const user = expressReq.user;
-    res.send({message: 'Secret material from Attractor', user: user});
+    res.send({message: 'Доступ к данным запрещён', user: user});
 });
 
 export default userRouter;

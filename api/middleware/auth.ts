@@ -12,14 +12,14 @@ const auth = async (expressReq: Request, res: Response, next: NextFunction) => {
     const token = req.get('Authorization');
 
     if (!token) {
-        res.status(401).send({error: 'No token present'});
+        res.status(401).send({error: 'Токен отсутствует.'});
         return;
     }
 
     const user = await User.findOne({token});
 
     if (!user) {
-        res.status(401).send({error: 'Wrong token'});
+        res.status(401).send({error: 'Неверный токен'});
         return;
     }
     req.user = user;

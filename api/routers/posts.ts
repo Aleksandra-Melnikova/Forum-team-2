@@ -11,14 +11,14 @@ postsRouter.post('/', imagesUpload.single('image'), async (req: express.Request,
     const token = req.get('Authorization');
 
     if (!token) {
-        res.status(401).send({error: 'No token present'});
+        res.status(401).send({error: 'Токен отсутствует.'});
         return;
     }
 
     const user = await User.findOne({token});
 
     if (!user) {
-        res.status(401).send({error: 'No user matches this token'});
+        res.status(401).send({error: 'Пользователь, соответствующий этому токену, не найден.'});
         return;
     }
 
@@ -61,7 +61,7 @@ postsRouter.get('/:id', async (req: express.Request, res: express.Response, next
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-            res.status(400).send({error: 'Invalid post ID.'});
+            res.status(400).send({error: 'Неверный post ID.'});
         return;
     }
 
@@ -71,7 +71,7 @@ postsRouter.get('/:id', async (req: express.Request, res: express.Response, next
             .populate('user', '-_id -token -password -__v');
 
         if (!post) {
-            res.status(404).send({error: 'Post not found'});
+            res.status(404).send({error: 'Пост не найден'});
             return;
         }
 

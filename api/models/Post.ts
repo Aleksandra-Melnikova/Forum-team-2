@@ -5,11 +5,11 @@ const PostSchema = new mongoose.Schema<IPost>({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'User id is required'],
+        required: [true, 'Требуется идентификатор пользователя.'],
     },
     title: {
         type: String,
-        required: [true, 'Post title is required.'],
+        required: [true, 'Требуется идентификатор заголовка.'],
     },
     description: String,
     image: String,
@@ -21,8 +21,8 @@ const PostSchema = new mongoose.Schema<IPost>({
 
 PostSchema.pre('validate', function (next) {
     if (!this.description && !this.image) {
-        this.invalidate('description', 'Fill in either description or image.');
-        this.invalidate('image', 'Fill in either description or image.');
+        this.invalidate('description', 'Заполните поля описания, либо изображения.');
+        this.invalidate('image', 'Заполните поля описания, либо изображения.');
     }
     next();
 });

@@ -11,19 +11,19 @@ commentsRouter.post("/", auth, async (req, res, next) => {
     const user = expressReq.user;
 
     if (!user) {
-        res.status(400).send({error: 'User not found'});
+        res.status(400).send({error: 'Пользователь не найден'});
         return;
     }
 
     if (!req.query.post_id) {
-        res.status(400).send({error: "Text and Post_id must be present in the request"});
+        res.status(400).send({error: "Текст и Post_id должны присутствовать в запросе."});
         return;
     }
 
     const postId = await Post.findById(req.query.post_id);
 
     if (!postId) {
-        res.status(400).send({error: "Post not found"});
+        res.status(400).send({error: "Пост не найден"});
         return;
     }
     try{
@@ -51,14 +51,14 @@ commentsRouter.get("/",  async (req, res, next) => {
     try{
 
         if (!req.query.post_id) {
-            res.status(400).send({error: " PostId must be present in the query"});
+            res.status(400).send({error: "Текст и Post_id должны присутствовать в запросе."});
             return;
         }
 
         const post = await Post.findById(req.query.post_id);
 
         if (!post) {
-             res.status(400).send({error: "Post not found"});
+             res.status(400).send({error: "Пост не найден"});
             return;
         }
 
