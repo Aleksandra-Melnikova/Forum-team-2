@@ -35,25 +35,25 @@ const run = async () => {
             date: new Date(),
             author: jane._id,
             title: "Кто на меня подписан, тот знает: я не такой",
-            image: "fixtures/post1.jpg",
+            image: "fixtures/post1.png",
         },
         {
             date: new Date(),
             author: jane._id,
             title: "Кто в аскфм?",
-            image: "fixtures/post2.jpg",
+            image: "fixtures/post2.png",
         },
         {
             date: new Date(),
             author: john._id,
             title: "POV: Ты случайно зашёл в мой профиль",
-            image: "fixtures/post3.jpg",
+            image: "fixtures/post3.png",
         },
         {
             date: new Date(),
             author: john._id,
             title: "Это не я, это фильтр так решил",
-            image: "fixtures/post4.jpg",
+            image: "fixtures/post4.png",
         }
     );
 
