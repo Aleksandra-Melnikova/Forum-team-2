@@ -1,7 +1,7 @@
 import express from 'express';
 import Post from '../models/Post';
 import {imagesUpload} from '../multer';
-import {Error} from 'mongoose';
+import mongoose, {Error} from 'mongoose';
 import User from '../models/User';
 
 const postsRouter = express.Router();
@@ -52,6 +52,30 @@ postsRouter.get('/', async (req: express.Request, res: express.Response, next) =
             .sort({datetime: -1});
 
         res.send(posts);
+    } catch (e) {
+        next(e);
+    }
+});
+
+postsRouter.get('/:id', async (req: express.Request, res: express.Response, next) => {
+    const {id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400).send('Invalid post ID.');
+        return;
+    }
+
+    try {
+        const post = await Post
+            .findById(id)
+            .populate('user', '-_id -token -password -__v');
+
+        if (!post) {
+            res.status(404).send({error: 'Post not found'});
+            return;
+        }
+
+        res.send(post);
     } catch (e) {
         next(e);
     }
