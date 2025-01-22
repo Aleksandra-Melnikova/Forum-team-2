@@ -61,7 +61,7 @@ postsRouter.get('/:id', async (req: express.Request, res: express.Response, next
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(400).send('Invalid post ID.');
+            res.status(400).send({error: 'Invalid post ID.'});
         return;
     }
 
