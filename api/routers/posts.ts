@@ -22,6 +22,11 @@ postsRouter.post('/', imagesUpload.single('image'), async (req: express.Request,
         return;
     }
 
+    if (!description && !req.file) {
+        res.status(400).send({error: 'Заполните поле описания или добавьте изображение.'});
+        return;
+    }
+
     try {
         const post = new Post({
             user: user._id,
@@ -61,7 +66,7 @@ postsRouter.get('/:id', async (req: express.Request, res: express.Response, next
     const {id} = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-            res.status(400).send({error: 'Неверный post ID.'});
+        res.status(400).send({error: 'Неверный post ID.'});
         return;
     }
 
