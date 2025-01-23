@@ -62,15 +62,9 @@ commentsRouter.get("/",  async (req, res, next) => {
             return;
         }
 
-        const commentCount = await Comment.countDocuments({post: req.query.post_id});
-
         const comments = await Comment.find({post: req.query.post_id}).populate('user', 'username');
 
-        res.send({
-            postId: req.query.post_id,
-            commentCount,
-            comments,
-        });
+        res.send(comments);
 
     }catch(error){
         next(error);
