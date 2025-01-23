@@ -42,7 +42,7 @@ const Register = () => {
 
   return (
     <>
-      <section className="vh-100">
+      <section className="vh-100 mt-2">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -50,7 +50,7 @@ const Register = () => {
                 <div className="card-body p-md-5">
                   <div className="row justify-content-center">
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                      <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                      <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-2">
                         Регистрация
                       </p>
 
@@ -91,7 +91,10 @@ const Register = () => {
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             {getFieldError("password") ? (
-                              <div className="alert alert-danger w-100 text-center p-1 mx-auto" role="alert">
+                              <div
+                                className="alert alert-danger w-100 text-center p-1 mx-auto"
+                                role="alert"
+                              >
                                 {getFieldError("password")}
                               </div>
                             ) : null}
@@ -121,7 +124,7 @@ const Register = () => {
                             Зарегистрироваться
                           </button>
                         </div>
-                        <NavLink to="/login" className={"d-block text-center"}>
+                        <NavLink to={"/login"} className={"d-block text-center"}>
                           У вас уже есть аккаунт? Войти
                         </NavLink>
                       </form>
