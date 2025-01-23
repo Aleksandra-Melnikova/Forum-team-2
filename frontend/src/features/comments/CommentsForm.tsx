@@ -14,6 +14,12 @@ const CommentsForm: React.FC<Props> = ({postId}) => {
 
   const formSubmit = async (e: FormEvent) =>{
     e.preventDefault()
+
+    if (!text.trim()) {
+      alert('Комментарий не может быть пустым!');
+      return;
+    }
+
     if (postId && text.trim().length > 0) {
       try {
         await dispatch(addComment({post_id: postId, comment: text}));

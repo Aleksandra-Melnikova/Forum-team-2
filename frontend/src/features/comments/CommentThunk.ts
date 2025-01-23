@@ -27,7 +27,8 @@ export const addComment = createAsyncThunk<string, { post_id: string; comment: s
       }
     } catch (e) {
       if (isAxiosError(e) && e.response && e.response.status === 400) {
-        return rejectWithValue(e.response.data);
+        return rejectWithValue(e.response.data as GlobalError);
       }
+      throw e;
     }
   });
