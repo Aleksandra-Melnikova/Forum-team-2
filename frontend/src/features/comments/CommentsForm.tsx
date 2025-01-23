@@ -24,10 +24,10 @@ const CommentsForm: React.FC<Props> = ({postId}) => {
       }
     }
   }
-  return (
+  return (postId && user) && (
     <div>
       <div
-        style={{maxWidth: "500px"}}
+        style={{maxWidth: "100%"}}
         className="container mt-5 bg-white p-4 shadow rounded"
       >
         <h3 className="text-center mb-5 mt-2">Новый комментарий</h3>
