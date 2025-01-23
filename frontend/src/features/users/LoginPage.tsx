@@ -96,7 +96,7 @@ const Register = () => {
                           Войти
                         </button>
                       </div>
-                      <NavLink to="/register" className={"d-block text-center"}>
+                      <NavLink to={"/register"} className={"d-block text-center"}>
                         Еще нет аккаунта? Зарегистрироваться
                       </NavLink>
                     </form>
