@@ -2,6 +2,7 @@ import { IPost } from "../../types";
 import { Link } from "react-router-dom";
 import React from "react";
 import { apiUrl } from "../../globalConstants.ts";
+import dayjs from "dayjs";
 
 interface Props {
   post: IPost;
@@ -10,21 +11,37 @@ interface Props {
 const Post: React.FC<Props> = ({ post }) => {
   return (
     <div
-      className="card mb-4 d-flex flex-column shadow rounded border-0"
-      style={{ maxWidth: "400px" }}
+      className="w-75 p-3 mb-4 row d-flex shadow rounded border-0"
+      style={{ maxWidth: "700px" }}
     >
-      <div className="card-header bg-white">
-        <h4 className="card-title m-0 p-0">{post.user.username}</h4>
+      <div
+        className={
+          post.image
+            ? "col-sm-12 col-md-6 col-lg-6 col-xl-6"
+            : "col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-center justify-content-center text-primary"
+        }
+        style={{ minWidth: "200px" }}
+      >
+        {post.image ? (
+          <img
+            src={post.image ? `${apiUrl}/${post.image}` : undefined}
+            alt={post.title}
+            className="w-100 h-auto mb-3 rounded col-6"
+          />
+        ) : (
+          <i className="bi bi-chat-left-text-fill"></i>
+        )}
       </div>
-      <div className="card-body d-flex flex-column pb-4">
-        <img
-          src={post.image ? `${apiUrl}/${post.image}` : undefined}
-          alt={post.title}
-          className="w-100 h-auto card-img mb-3"
-        />
-        <h5 className="card-text fw-bold mb-4">{post.title}</h5>
+      <div
+        className={"col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex flex-column"}
+      >
+        <h5 className="fs-4 mb-1">{post.user.username}</h5>
+        <p className="text-muted">
+          {dayjs(post.datetime).format("DD.MM.YYYY в HH:mm")}
+        </p>
+        <h5 className="fw-semibold my-auto fs-3 fs-sm-6 mb-4">{post.title}</h5>
 
-        <div className="mt-auto">
+        <div className="mt-auto mb-3">
           <Link to={`/posts/${post._id}`} className="btn btn-primary">
             Читать полностью
           </Link>
