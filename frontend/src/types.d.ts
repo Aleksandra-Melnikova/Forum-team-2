@@ -51,3 +51,10 @@ export interface IPostMutation {
   description: string;
   image: File | null;
 }
+
+export interface IComment {
+  _id: string;
+  user:User,
+  post: IPost,
+  text: string;
+}
