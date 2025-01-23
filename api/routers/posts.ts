@@ -3,6 +3,7 @@ import Post from '../models/Post';
 import {imagesUpload} from '../multer';
 import mongoose, {Error} from 'mongoose';
 import User from '../models/User';
+import Comment from "../models/Comment";
 
 const postsRouter = express.Router();
 
@@ -50,8 +51,22 @@ postsRouter.get('/', async (req: express.Request, res: express.Response, next) =
             .find()
             .populate('user', '-_id -token -password -__v')
             .sort({datetime: -1});
+        const result = [];
+        let array=[];
+        const arrayComment = await Comment.find();
+        for (let i=0; i<posts.length; i++){
+            for (let j=0; j<arrayComment.length; j++){
+                if (String(arrayComment[j].post) === String(posts[i]._id)){
+                    array.push(arrayComment[j]);
+                }
+            }
+            const commentNumber =  array.length;
+            result.push({post:posts[i], commentNumber: commentNumber});
+            array = [];
+        }
 
-        res.send(posts);
+        res.send(result);
+
     } catch (e) {
         next(e);
     }

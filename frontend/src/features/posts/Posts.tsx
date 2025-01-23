@@ -23,7 +23,7 @@ const Posts = () => {
         <div className="d-flex flex-column align-items-center mt-5">
           <>
             {posts.map((post: IPost) => (
-              <Post post={post} key={post._id} />
+              <Post post={post} key={post.post._id} />
             ))}
           </>
         </div>

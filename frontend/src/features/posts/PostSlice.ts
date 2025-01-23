@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IPost, ValidationError } from "../../types";
+import { IDetailedPost, IPost, ValidationError } from '../../types';
 import { addPost, fetchPosts, getPost } from "./PostThunk.ts";
 import { RootState } from "../../app/store.ts";
 
 interface PostState {
   posts: IPost[];
-  post: IPost | null;
+  post: IDetailedPost | null;
   isFetching: boolean;
   isCreating: boolean;
   fetchingError: boolean;

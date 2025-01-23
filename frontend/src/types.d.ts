@@ -36,6 +36,20 @@ export interface GlobalError {
 }
 
 export interface IPost {
+  post: {
+    _id: string;
+    user: {
+      username: string;
+    };
+    title: string;
+    description: string;
+    image: File | null;
+    datetime: Date;
+  };
+  commentNumber: number;
+}
+
+export interface IDetailedPost {
   _id: string;
   user: {
     username: string;
@@ -46,6 +60,7 @@ export interface IPost {
   datetime: Date;
 }
 
+
 export interface IPostMutation {
   title: string;
   description: string;
@@ -54,7 +69,7 @@ export interface IPostMutation {
 
 export interface IComment {
   _id: string;
-  user:User,
-  post: IPost,
+  user: User;
+  post: IPost;
   text: string;
 }

@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { RegisterMutation } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import { login } from "./UserThunk.ts";
-import { selectLoginError, selectLoginLoading } from './UserSlice.ts';
+import { selectLoginError, selectLoginLoading } from "./UserSlice.ts";
 
 //
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import ButtonLoading from '../../components/UI/ButtonLoading/ButtonLoading.tsx';
+import ButtonLoading from "../../components/UI/ButtonLoading/ButtonLoading.tsx";
 
 const Register = () => {
   const [form, setForm] = useState<RegisterMutation>({
@@ -98,7 +98,10 @@ const Register = () => {
                           isDisabled={loading}
                         />
                       </div>
-                      <NavLink to={"/register"} className={"d-block text-center"}>
+                      <NavLink
+                        to={"/register"}
+                        className={"d-block text-center"}
+                      >
                         Еще нет аккаунта? Зарегистрироваться
                       </NavLink>
                     </form>

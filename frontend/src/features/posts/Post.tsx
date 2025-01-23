@@ -16,16 +16,16 @@ const Post: React.FC<Props> = ({ post }) => {
     >
       <div
         className={
-          post.image
+          post.post.image
             ? "col-sm-12 col-md-6 col-lg-6 col-xl-6"
             : "col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex align-items-center justify-content-center text-primary"
         }
         style={{ minWidth: "200px" }}
       >
-        {post.image ? (
+        {post.post.image ? (
           <img
-            src={post.image ? `${apiUrl}/${post.image}` : undefined}
-            alt={post.title}
+            src={post.post.image ? `${apiUrl}/${post.post.image}` : undefined}
+            alt={post.post.title}
             className="w-100 h-auto mb-3 rounded col-6"
           />
         ) : (
@@ -35,14 +35,19 @@ const Post: React.FC<Props> = ({ post }) => {
       <div
         className={"col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex flex-column"}
       >
-        <h5 className="fs-4 mb-1">{post.user.username}</h5>
+        <h5 className="fs-4 mb-1">{post.post.user.username}</h5>
         <p className="text-muted">
-          {dayjs(post.datetime).format("DD.MM.YYYY в HH:mm")}
+          {dayjs(post.post.datetime).format("DD.MM.YYYY в HH:mm")}
         </p>
-        <h5 className="fw-semibold my-auto fs-3 fs-sm-6 mb-4">{post.title}</h5>
-
+        <h5 className="fw-semibold my-auto fs-3 fs-sm-6 mb-4">
+          {post.post.title}
+        </h5>
         <div className="mt-auto mb-3">
-          <Link to={`/posts/${post._id}`} className="btn btn-primary">
+          <span className={"mb-2 d-inline-block"}>
+            {" "}
+            {post.commentNumber} коментариия(ев)
+          </span>
+          <Link to={`/posts/${post.post._id}`} className="btn btn-primary">
             Читать полностью
           </Link>
         </div>

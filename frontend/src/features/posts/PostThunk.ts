@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IPost, IPostMutation, ValidationError } from "../../types";
+import { IDetailedPost, IPost, IPostMutation, ValidationError } from '../../types';
 import axiosApi from "../../axiosApi.ts";
 import { RootState } from "../../app/store.ts";
 import { isAxiosError } from "axios";
@@ -47,10 +47,10 @@ export const addPost = createAsyncThunk<
   }
 });
 
-export const getPost = createAsyncThunk<IPost, string>(
+export const getPost = createAsyncThunk<IDetailedPost, string>(
   "posts/getPost",
   async (postId) => {
-    const response = await axiosApi.get<IPost>(`/posts/${postId}`);
+    const response = await axiosApi.get<IDetailedPost>(`/posts/${postId}`);
     return response.data;
   },
 );

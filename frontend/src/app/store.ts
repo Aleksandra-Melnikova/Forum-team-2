@@ -12,7 +12,7 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import { postsReducer } from "../features/posts/PostSlice.ts";
-import { commentsReducer } from '../features/comments/CommentSlice.ts';
+import { commentsReducer } from "../features/comments/CommentSlice.ts";
 
 const usersPersistConfig = {
   key: "store:users",
