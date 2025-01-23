@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   font-family: "Montserrat", sans-serif;
@@ -6,5 +6,9 @@
 }
 
 body {
-  background-color: #E9ECEF !important;
+  background-color: #e9ecef !important;
+}
+
+.bi-chat-left-text-fill {
+  font-size: 4rem !important;
 }
