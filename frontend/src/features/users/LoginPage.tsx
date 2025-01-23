@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { RegisterMutation } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import { login } from "./UserThunk.ts";
-import { selectLoginError } from "./UserSlice.ts";
+import { selectLoginError, selectLoginLoading } from './UserSlice.ts';
 
 //
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import ButtonLoading from '../../components/UI/ButtonLoading/ButtonLoading.tsx';
 
 const Register = () => {
   const [form, setForm] = useState<RegisterMutation>({
@@ -16,6 +17,7 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const loginError = useAppSelector(selectLoginError);
   const navigate = useNavigate();
+  const loading = useAppSelector(selectLoginLoading);
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm((prevState) => {
@@ -89,14 +91,14 @@ const Register = () => {
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button
+                        <ButtonLoading
                           type="submit"
-                          className="btn btn-primary btn-lg"
-                        >
-                          Войти
-                        </button>
+                          text={" Войти"}
+                          isLoading={loading}
+                          isDisabled={loading}
+                        />
                       </div>
-                      <NavLink to="/register" className={"d-block text-center"}>
+                      <NavLink to={"/register"} className={"d-block text-center"}>
                         Еще нет аккаунта? Зарегистрироваться
                       </NavLink>
                     </form>

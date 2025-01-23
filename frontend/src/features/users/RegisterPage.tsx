@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RegisterMutation } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
-import { selectRegisterError } from "./UserSlice.ts";
+import { selectRegisterError, selectRegisterLoading } from './UserSlice.ts';
 
 import { NavLink } from "react-router-dom";
 import { register } from "./UserThunk.ts";
+import ButtonLoading from '../../components/UI/ButtonLoading/ButtonLoading.tsx';
 
 const Register = () => {
   const [form, setForm] = useState<RegisterMutation>({
@@ -15,6 +16,7 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectRegisterError);
   const navigate = useNavigate();
+  const loading = useAppSelector(selectRegisterLoading)
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm((prevState) => {
@@ -114,14 +116,17 @@ const Register = () => {
                         </div>
 
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <button
+                          <ButtonLoading
                             type="submit"
-                            className="btn btn-primary btn-lg"
+                            // className="btn btn-primary btn-lg"
+                            text={"Зарегистрироваться"}
+                            isLoading={loading}
+                            isDisabled={loading}
                           >
-                            Зарегистрироваться
-                          </button>
+
+                          </ButtonLoading>
                         </div>
-                        <NavLink to="/login" className={"d-block text-center"}>
+                        <NavLink to={"/login"} className={"d-block text-center"}>
                           У вас уже есть аккаунт? Войти
                         </NavLink>
                       </form>
