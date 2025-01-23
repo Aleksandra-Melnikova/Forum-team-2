@@ -5,9 +5,18 @@ interface Props {
   label: string;
   onGetFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
   file: File | null;
+  id: string;
+  className?: string;
 }
 
-const FileInput: React.FC<Props> = ({ name, label, onGetFile, file }) => {
+const FileInput: React.FC<Props> = ({
+  name,
+  label,
+  onGetFile,
+  file,
+  id,
+  className,
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("");
 
@@ -43,7 +52,8 @@ const FileInput: React.FC<Props> = ({ name, label, onGetFile, file }) => {
 
       <div className="d-flex justify-content-start gap-4 align-items-center mb-3">
         <input
-          className="form-control"
+          id={id}
+          className={className}
           disabled
           placeholder={label}
           value={fileName}

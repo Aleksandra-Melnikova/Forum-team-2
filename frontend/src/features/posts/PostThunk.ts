@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { GlobalError, IPost, IPostMutation } from "../../types";
+import { IPost, IPostMutation, ValidationError } from "../../types";
 import axiosApi from "../../axiosApi.ts";
 import { RootState } from "../../app/store.ts";
 import { isAxiosError } from "axios";
@@ -15,7 +15,7 @@ export const fetchPosts = createAsyncThunk<IPost[], void>(
 export const addPost = createAsyncThunk<
   IPost,
   { postMutation: IPostMutation },
-  { state: RootState; rejectValue: GlobalError }
+  { state: RootState; rejectValue: ValidationError }
 >("posts/addPost", async ({ postMutation }, { getState, rejectWithValue }) => {
   const token = getState().users.user?.token;
 
@@ -41,7 +41,7 @@ export const addPost = createAsyncThunk<
       error.response &&
       error.response.status === 400
     ) {
-      return rejectWithValue(error.response.data as GlobalError);
+      return rejectWithValue(error.response.data as ValidationError);
     }
     throw error;
   }

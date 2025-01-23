@@ -9,7 +9,12 @@ const PostSchema = new mongoose.Schema<IPost>({
     },
     title: {
         type: String,
-        required: [true, 'Требуется идентификатор заголовка.'],
+        validate: {
+            validator: async function (value: string): Promise<boolean> {
+                return value.trim().length > 0;
+            },
+            message: "Заполните это поле.",
+        },
     },
     description: String,
     image: String,
@@ -20,7 +25,7 @@ const PostSchema = new mongoose.Schema<IPost>({
 });
 
 PostSchema.pre('validate', function (next) {
-    if (!this.description && !this.image) {
+    if (this.description.trim().length === 0 && !this.image) {
         this.invalidate('description', 'Заполните поля описания, либо изображения.');
         this.invalidate('image', 'Заполните поля описания, либо изображения.');
     }

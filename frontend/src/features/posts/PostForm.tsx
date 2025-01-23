@@ -58,6 +58,14 @@ const PostForm = () => {
     }
   };
 
+  const getFieldError = (fieldName: string) => {
+    try {
+      return creatingError?.errors[fieldName].message;
+    } catch {
+      return undefined;
+    }
+  };
+
   return (
     <>
       <div
@@ -67,22 +75,19 @@ const PostForm = () => {
         <h3 className="text-center mb-5 mt-2">Новый пост</h3>
 
         <form onSubmit={onFormSubmit}>
-          {creatingError && (
-            <div className="alert alert-danger" role="alert">
-              {creatingError.error}
-            </div>
-          )}
-
           <div className="mb-3">
             <input
               type="text"
-              className="form-control"
               name="title"
               id="title"
               value={form.title}
               onChange={onInputChange}
+              className={`form-control ${getFieldError("title") ? "is-invalid" : ""}`}
             />
             <label htmlFor="title">Заголовок</label>
+            {getFieldError("title") && (
+              <div className="invalid-feedback">{getFieldError("title")}</div>
+            )}
           </div>
 
           <div className="mb-3">
@@ -91,18 +96,29 @@ const PostForm = () => {
               id="description"
               value={form.description}
               onChange={onInputChange}
-              className="form-control"
+              className={`form-control ${getFieldError("description") ? "is-invalid" : ""}`}
             />
             <label htmlFor="description">Описание</label>
+            {getFieldError("description") && (
+              <div className="invalid-feedback">
+                {getFieldError("description")}
+              </div>
+            )}
           </div>
 
           <div className="mb-3">
             <FileInput
+              id="image"
               name="image"
               label="Изображение"
               onGetFile={onFileChange}
               file={form.image}
+              className={`form-control ${getFieldError("image") ? "is-invalid" : ""}`}
             />
+
+            {getFieldError("image") && (
+              <div className="invalid-feedback">{getFieldError("image")}</div>
+            )}
           </div>
 
           <div className="d-flex gap-3 justify-content-center mb-3">

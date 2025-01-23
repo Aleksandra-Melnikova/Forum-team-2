@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { GlobalError, IPost } from "../../types";
+import { IPost, ValidationError } from "../../types";
 import { addPost, fetchPosts, getPost } from "./PostThunk.ts";
 import { RootState } from "../../app/store.ts";
 
@@ -9,7 +9,7 @@ interface PostState {
   isFetching: boolean;
   isCreating: boolean;
   fetchingError: boolean;
-  creatingError: GlobalError | null;
+  creatingError: ValidationError | null;
 }
 
 const initialState: PostState = {
