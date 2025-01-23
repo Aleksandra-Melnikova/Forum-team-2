@@ -22,11 +22,6 @@ postsRouter.post('/', imagesUpload.single('image'), async (req: express.Request,
         return;
     }
 
-    if (!description && !req.file) {
-        res.status(400).send({error: 'Заполните поле описания или добавьте изображение.'});
-        return;
-    }
-
     try {
         const post = new Post({
             user: user._id,
@@ -40,9 +35,9 @@ postsRouter.post('/', imagesUpload.single('image'), async (req: express.Request,
         await post.save();
 
         res.send(post);
-    } catch (error) {
+    }  catch (error) {
         if (error instanceof Error.ValidationError) {
-            res.status(400).send({error});
+            res.status(400).send(error);
             return;
         }
         next(error);
