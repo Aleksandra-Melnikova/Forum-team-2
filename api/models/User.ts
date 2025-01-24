@@ -5,6 +5,7 @@ import {randomUUID} from "node:crypto";
 
 interface UserMethods {
     checkPassword(password: string): Promise<boolean>;
+
     generateToken(): void;
 }
 
@@ -21,20 +22,40 @@ const UserSchema = new Schema<
 >({
     username: {
         type: String,
-        required: true,
         unique: true,
-        validate: {
-            validator: async function (this: HydratedDocument<UserFields>, value: string): Promise<boolean> {
-                if(!this.isModified('username')) return true;
-                const user: UserFields | null = await User.findOne({username: value});
-                return !user;
+        validate: [
+            {
+                validator: async function (this: HydratedDocument<UserFields>, value: string): Promise<boolean> {
+                    if (!this.isModified('username')) return true;
+                    const user: UserFields | null = await User.findOne({username: value});
+                    return !user;
+                },
+                message: "Данное имя пользователя уже занято.",
             },
-            message: "Данное имя пользователя уже занято.",
-        }
+            {
+                validator: function (value: string): boolean {
+                    return value.trim().length > 0;
+                },
+                message: "Заполните логин.",
+            },
+        ],
     },
     password: {
         type: String,
-        required: true,
+        validate: [
+            {
+                validator: async function (value: string): Promise<boolean> {
+                    return value === value.trim();
+                },
+                message: "Пароль не должен содержать пробелов."
+            },
+            {
+                validator: async function (value: string): Promise<boolean> {
+                    return value.trim().length > 0;
+                },
+                message: "Заполните пароль.",
+            },
+        ],
     },
     token: {
         type: String,
