@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import { selectUser } from "../users/UserSlice.ts";
 import { addComment, getAllCommentsByPost } from "./CommentThunk.ts";
+import { selectCommentErrorAdd } from "./CommentSlice.ts";
 
 interface Props {
   postId: string | undefined;
@@ -11,16 +12,11 @@ const CommentsForm: React.FC<Props> = ({ postId }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const [text, setText] = useState("");
+  const addErrorComment = useAppSelector(selectCommentErrorAdd);
 
   const formSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    if (!text.trim()) {
-      alert("Комментарий не может быть пустым!");
-      return;
-    }
-
-    if (postId && text.trim().length > 0) {
+    if (postId) {
       try {
         await dispatch(addComment({ post_id: postId, comment: text }));
         await dispatch(getAllCommentsByPost(postId));
@@ -30,6 +26,15 @@ const CommentsForm: React.FC<Props> = ({ postId }) => {
       }
     }
   };
+
+  const getFieldError = (fieldName: string) => {
+    try {
+      return addErrorComment?.errors[fieldName].message;
+    } catch {
+      return undefined;
+    }
+  };
+
   return (
     postId &&
     user && (
@@ -45,12 +50,15 @@ const CommentsForm: React.FC<Props> = ({ postId }) => {
               <label htmlFor="title">Коментарий</label>
               <input
                 type="text"
-                className="form-control"
+                className={`form-control ${getFieldError("text") ? "is-invalid" : ""}`}
                 name="text"
                 id="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
+              {getFieldError("text") && (
+                <div className="invalid-feedback">{getFieldError("text")}</div>
+              )}
             </div>
             <div className="d-flex gap-3 justify-content-center mb-3">
               <button

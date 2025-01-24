@@ -1,4 +1,4 @@
-import { IComment } from "../../types";
+import { IComment, ValidationError } from "../../types";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store.ts";
 import { addComment, getAllCommentsByPost } from "./CommentThunk.ts";
@@ -7,17 +7,21 @@ interface CommentState {
   comments: IComment[];
   loading: boolean;
   error: boolean;
+  addError: ValidationError | null;
 }
 
 const initialState: CommentState = {
   comments: [],
   loading: false,
   error: false,
+  addError: null,
 };
 
 export const selectComment = (state: RootState) => state.comments.comments;
 export const selectCommentLoading = (state: RootState) =>
   state.comments.loading;
+export const selectCommentErrorAdd = (state: RootState) =>
+  state.comments.addError;
 
 const commentSlice = createSlice({
   name: "comments",
@@ -41,13 +45,13 @@ const commentSlice = createSlice({
       })
       .addCase(addComment.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.addError = null;
       })
       .addCase(addComment.fulfilled, (state) => {
         state.loading = false;
       })
-      .addCase(addComment.rejected, (state) => {
-        state.error = true;
+      .addCase(addComment.rejected, (state, { payload: error }) => {
+        state.addError = error || null;
       });
   },
 });

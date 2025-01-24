@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { GlobalError, IComment } from "../../types";
+import { IComment, ValidationError } from "../../types";
 import axiosApi from "../../axiosApi.ts";
 import { isAxiosError } from "axios";
 import { RootState } from "../../app/store.ts";
@@ -15,7 +15,7 @@ export const getAllCommentsByPost = createAsyncThunk<IComment[], string>(
 export const addComment = createAsyncThunk<
   string,
   { post_id: string; comment: string },
-  { state: RootState; rejectValue: GlobalError }
+  { state: RootState; rejectValue: ValidationError }
 >(
   "comment/add-by-post",
   async (
@@ -32,11 +32,15 @@ export const addComment = createAsyncThunk<
         );
         return response.data.id;
       }
-    } catch (e) {
-      if (isAxiosError(e) && e.response && e.response.status === 400) {
-        return rejectWithValue(e.response.data as GlobalError);
+    } catch (error) {
+      if (
+        isAxiosError(error) &&
+        error.response &&
+        error.response.status === 400
+      ) {
+        return rejectWithValue(error.response.data as ValidationError);
       }
-      throw e;
+      throw error;
     }
   },
 );
