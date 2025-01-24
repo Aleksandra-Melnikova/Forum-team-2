@@ -45,7 +45,7 @@ const Post: React.FC<Props> = ({ post }) => {
         <div className="mt-auto mb-3">
           <span className={"mb-2 d-inline-block"}>
             {" "}
-            {post.commentNumber} коментариия(ев)
+            {post.commentNumber} коментария(ев)
           </span>
           <Link to={`/posts/${post.post._id}`} className="btn btn-primary">
             Читать полностью
