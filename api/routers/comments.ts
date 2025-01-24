@@ -39,10 +39,9 @@ commentsRouter.post("/", auth, async (req, res, next) => {
 
     }catch(error){
         if (error instanceof Error.ValidationError) {
-            res.status(400).send({error});
+            res.status(400).send(error);
             return;
         }
-
         next(error);
     }
 });

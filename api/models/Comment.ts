@@ -14,7 +14,12 @@ const CommentSchema = new mongoose.Schema({
     },
     text: {
         type: String,
-        required: [true, 'Требуется идентификатор текста.'],
+        validate: {
+            validator: async function (value: string): Promise<boolean> {
+                return value.trim().length > 0;
+            },
+            message: "Заполните комментарий",
+        },
     },
 });
 
