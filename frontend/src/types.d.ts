@@ -60,7 +60,6 @@ export interface IDetailedPost {
   datetime: Date;
 }
 
-
 export interface IPostMutation {
   title: string;
   description: string;

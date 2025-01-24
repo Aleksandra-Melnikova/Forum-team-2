@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IDetailedPost, IPost, IPostMutation, ValidationError } from '../../types';
+import {
+  IDetailedPost,
+  IPost,
+  IPostMutation,
+  ValidationError,
+} from "../../types";
 import axiosApi from "../../axiosApi.ts";
 import { RootState } from "../../app/store.ts";
 import { isAxiosError } from "axios";

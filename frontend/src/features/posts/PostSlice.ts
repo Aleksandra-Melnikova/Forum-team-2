@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IDetailedPost, IPost, ValidationError } from '../../types';
+import { IDetailedPost, IPost, ValidationError } from "../../types";
 import { addPost, fetchPosts, getPost } from "./PostThunk.ts";
 import { RootState } from "../../app/store.ts";
 
